@@ -2,21 +2,22 @@ FROM ros:noetic
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* && apt-get update && apt-get upgrade -y
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* && apt-get update && \
+    apt-get upgrade -y
 
 # Generic software
-RUN apt install -y curl git neovim ranger neofetch htop
+RUN apt install -y curl git neovim ranger neofetch htop apt-utils
 
 # Installing node
-RUN curl -sL https://deb.nodesource.com/setup_19.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
 # Setup neovim
-RUN mkdir -p /root/.config/nvim && \
-    wget https://github.com/Macavitycode/Dotfiles/blob/master/nvim/init.vim &&\
-    mv ./init.vim /root/.config/nvim/
+RUN mkdir -p /root/.config/nvim; \
+    curl -o /root/.config/nvim/init.vim \
+    https://raw.githubusercontent.com/Macavitycode/Dotfiles/master/nvim/minimal.vim
 
-RUN nvim +'PlugInstall' +qall && \
-    nvim +'CocInstall -sync coc-python coc-clangd' +qall
+# RUN nvim +'PlugInstall' +qall && \
+#     nvim +'CocInstall -sync coc-python coc-clangd' +qall
 
 
 # Gazebo 11 Installation
