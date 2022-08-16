@@ -33,7 +33,8 @@ RUN apt-get install -y \
     ros-noetic-xacro ros-noetic-robot-state-publisher \
     ros-noetic-teleop-twist-keyboard ros-noetic-rviz \
     ros-noetic-velocity-controllers ros-noetic-effort-controllers \
-    ros-noetic-position-controllers
+    ros-noetic-position-controllers ros-noetic-controller-* \
+    ros-noetic-joint-state-*
 
 
 USER root
